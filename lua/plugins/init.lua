@@ -22,5 +22,3 @@ require("lazy").setup({
   -- Add plugins here
 })
 --]]
-
-print("Neovim configuration loaded successfully!")
