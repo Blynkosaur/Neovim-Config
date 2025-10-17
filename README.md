@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Neovim-Config
 Neovim btw
 =======
