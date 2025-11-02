@@ -10,7 +10,7 @@ return {
         neovim_image_text = "The One True Text Editor",
         main_image = "neovim",
         client_id = "793271441293967371",
-        debounce_timeout = 10,
+        debounce_timeout = 40,
         buttons = true,
         show_time = true,
       })
