@@ -64,11 +64,16 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {},
+    {
+      "neovim/nvim-lspconfig",
+      opts = {
+        servers = {
+          pyright = {
+            mason = false,
+            autostart = false,
+          },
+        },
+      },
     },
   },
 

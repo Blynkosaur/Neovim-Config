@@ -1,3 +1,6 @@
+-- Disable pyright - set this BEFORE LazyVim loads
+vim.g.lazyvim_python_lsp = "pylsp"
+
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 require("plugins.lsp")
