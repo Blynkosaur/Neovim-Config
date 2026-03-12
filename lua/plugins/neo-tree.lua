@@ -1,19 +1,24 @@
 return {
-  "folke/snacks.nvim",
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
+    "MunifTanjim/nui.nvim",
+  },
   opts = {
-    explorer = {
-      files = {
-        hidden = true, -- show hidden files including .env
-        no_ignore = true, -- include files ignored by .gitignore
+    filesystem = {
+      follow_current_file = { enabled = true },
+      hijack_netrw_behavior = "open_default",
+      use_libuv_file_watcher = true,
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_gitignored = false,
       },
     },
-    picker = {
-      sources = {
-        files = {
-          hidden = true,
-          no_ignore = true,
-        },
-      },
+    window = {
+      position = "left",
+      width = 35,
     },
   },
 }

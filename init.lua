@@ -1,3 +1,22 @@
+-- Neo-tree file manager
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.keymap.set("n", "<leader>e", function()
+      Snacks.explorer.open({ root = vim.fn.getcwd() })
+    end, { desc = "Explorer (cwd)" })
+
+    vim.keymap.set("n", "<leader>fE", function()
+      Snacks.explorer.open({ root = vim.fn.getcwd() })
+    end, { desc = "Explorer (cwd)" })
+  end,
+})
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    local cwd = vim.fn.getcwd()
+    vim.cmd("cd ..")
+    vim.cmd("cd " .. cwd)
+  end,
+})
 -- Disable pyright - set this BEFORE LazyVim loads
 vim.g.lazyvim_python_lsp = "pylsp"
 
