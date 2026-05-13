@@ -11,6 +11,9 @@ return {
             pylsp = {
               plugins = {
                 pycodestyle = { enabled = false },
+                pyflakes = { enabled = false },
+                mccabe = { enabled = false },
+                autopep8 = { enabled = false },
               },
             },
           },
@@ -19,27 +22,24 @@ return {
       },
       setup = {
         pyright = function()
-          -- Explicitly prevent pyright from starting
           return true
         end,
       },
     },
   },
-  -- Override LazyVim Python extra to disable pyright
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      -- Force disable pyright even if Python extra tries to enable it
       if opts.servers then
         opts.servers.pyright = false
         opts.servers.basedpyright = false
       end
       if opts.setup then
         opts.setup.pyright = function()
-          return true -- Prevent setup
+          return true
         end
         opts.setup.basedpyright = function()
-          return true -- Prevent setup
+          return true
         end
       end
     end,
