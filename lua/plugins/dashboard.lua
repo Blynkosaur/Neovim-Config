@@ -96,19 +96,45 @@ for i, l in ipairs(lines) do
   lines[i] = l .. string.rep(" ", max_w - vim.fn.strdisplaywidth(l))
 end
 
+-- The commands hidden behind "Options".
+local commands = {
+  { desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+  { desc = "New File", action = ":ene | startinsert" },
+  { desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+  { desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+  { desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+  { desc = "Restore Session", action = ":lua require('persistence').load()" },
+  { desc = "Projects", action = ":lua Snacks.picker.projects()" },
+  { desc = "Lazy Extras", action = ":LazyExtras" },
+  { desc = "Lazy", action = ":Lazy" },
+}
+
+local function open_options()
+  vim.ui.select(commands, {
+    prompt = "Options",
+    format_item = function(item)
+      return item.desc
+    end,
+  }, function(choice)
+    if not choice then
+      return
+    end
+    if type(choice.action) == "function" then
+      choice.action()
+    else
+      vim.cmd(choice.action:gsub("^:", ""))
+    end
+  end)
+end
+
 return {
   "folke/snacks.nvim",
   opts = {
     dashboard = {
-      row = 1, -- anchor to the top so the tall header isn't clipped when centered
       preset = {
         header = table.concat(lines, "\n"),
         keys = {
-          { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-          { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-          { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-          { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+          { icon = " ", key = "o", desc = "Options", action = open_options },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
