@@ -96,6 +96,12 @@ for i, l in ipairs(lines) do
   lines[i] = l .. string.rep(" ", max_w - vim.fn.strdisplaywidth(l))
 end
 
+-- centered credit line under the art
+local credit = "customized by blynkosaur"
+local cpad = math.max(0, math.floor((max_w - vim.fn.strdisplaywidth(credit)) / 2))
+lines[#lines + 1] = ""
+lines[#lines + 1] = string.rep(" ", cpad) .. credit .. string.rep(" ", max_w - cpad - vim.fn.strdisplaywidth(credit))
+
 -- The commands hidden behind "Options".
 local commands = {
   { desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },

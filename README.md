@@ -1,6 +1,8 @@
 # Neovim-Config
 Neovim btw
 
+![preview](preview.png)
+
 ## Installation
 
 ### Prerequisites
