@@ -34,7 +34,6 @@ local left = vim.split(
 ⠀⠀⢠⣾⣿⣿⡿⣣⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
   "\n"
 )
-table.remove(left, 1)
 
 local right = vim.split(
   [[
@@ -60,7 +59,6 @@ local right = vim.split(
 ⠀⠈⠳⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
   "\n"
 )
-table.remove(right, 1)
 
 local function maxwidth(t)
   local w = 0
@@ -95,12 +93,6 @@ local max_w = maxwidth(lines)
 for i, l in ipairs(lines) do
   lines[i] = l .. string.rep(" ", max_w - vim.fn.strdisplaywidth(l))
 end
-
--- centered credit line under the art
-local credit = "customized by blynkosaur"
-local cpad = math.max(0, math.floor((max_w - vim.fn.strdisplaywidth(credit)) / 2))
-lines[#lines + 1] = ""
-lines[#lines + 1] = string.rep(" ", cpad) .. credit .. string.rep(" ", max_w - cpad - vim.fn.strdisplaywidth(credit))
 
 -- The commands hidden behind "Options".
 local commands = {
