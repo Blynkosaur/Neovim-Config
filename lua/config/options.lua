@@ -1,3 +1,5 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+-- Note: the active colorscheme is set via LazyVim opts in lua/plugins/color-scheme.lua,
+-- not vim.g.colorscheme (which LazyVim ignores).
