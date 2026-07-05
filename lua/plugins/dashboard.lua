@@ -125,6 +125,13 @@ local function open_options()
   end)
 end
 
+-- Color the header (incl. NEOVIM letters) with catppuccin mocha's ansi 15.
+local function set_header_hl()
+  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#a6adc8" })
+end
+set_header_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_header_hl })
+
 return {
   "folke/snacks.nvim",
   opts = {
