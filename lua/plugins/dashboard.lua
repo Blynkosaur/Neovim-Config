@@ -1,12 +1,16 @@
 -- Header: braille art (left) + NEOVIM block letters (center) + braille art (right).
+-- Don't vim.trim(): it strips the whole block's leading whitespace, which eats
+-- the dot line's leading spaces and shoves the "i" dot to column 1 (over the n).
 local neo = vim.split(
-  vim.trim([[
-███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
-████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
-██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
-██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
-██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
-╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]]),
+  [[
+                                           ███
+                                          ▒▒▒
+ ████████    ██████   ██████  █████ █████ ████  █████████████
+▒▒███▒▒███  ███▒▒███ ███▒▒███▒▒███ ▒▒███ ▒▒███ ▒▒███▒▒███▒▒███
+ ▒███ ▒███ ▒███████ ▒███ ▒███ ▒███  ▒███  ▒███  ▒███ ▒███ ▒███
+ ▒███ ▒███ ▒███▒▒▒  ▒███ ▒███ ▒▒███ ███   ▒███  ▒███ ▒███ ▒███
+ ████ █████▒▒██████ ▒▒██████   ▒▒█████    █████ █████▒███ █████
+▒▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒   ▒▒▒▒▒▒     ▒▒▒▒▒    ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒ ▒▒▒▒▒  ]],
   "\n"
 )
 
@@ -125,9 +129,22 @@ local function open_options()
   end)
 end
 
--- Color the header (incl. NEOVIM letters) with catppuccin mocha's ansi 15.
+-- Color the whole dashboard (header + keys/icons/footer/etc) with the same grey.
+local grey = "#a6adc8"
 local function set_header_hl()
-  vim.api.nvim_set_hl(0, "SnacksDashboardHeader", { fg = "#a6adc8" })
+  for _, g in ipairs({
+    "SnacksDashboardHeader",
+    "SnacksDashboardTitle",
+    "SnacksDashboardDesc",
+    "SnacksDashboardKey",
+    "SnacksDashboardIcon",
+    "SnacksDashboardDir",
+    "SnacksDashboardFile",
+    "SnacksDashboardFooter",
+    "SnacksDashboardSpecial",
+  }) do
+    vim.api.nvim_set_hl(0, g, { fg = grey })
+  end
 end
 set_header_hl()
 vim.api.nvim_create_autocmd("ColorScheme", { callback = set_header_hl })
